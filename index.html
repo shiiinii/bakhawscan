@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#173d32">
+  <meta name="description" content="BakhawScan is a mangrove leaf symptom detection research prototype.">
+  <meta name="color-scheme" content="light">
+  <title>BakhawScan · Mangrove leaf monitoring</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M7 3H5a2 2 0 0 0-2 2v2m14-4h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2m14 4h2a2 2 0 0 0 2-2v-2"/><path d="M5 12h14"/><path d="M10 8c4 0 6 2 4 8-4 0-7-3-4-8Z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l4-5 3 2 5-7"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6C9 4 6 4 3 5v14c3-1 6-1 9 1m0-14c3-2 6-2 9-1v14c-3-1-6-1-9 1m0-14v14"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h4l2-3h6l2 3h4v13H3Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C9 4 4 8 4 16c0 3 3 4 5 4 8 0 12-7 11-16ZM4 20c3-5 7-8 12-11"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 6-4 9-9 10-5-1-9-4-9-10V6l9-4Z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16m-10-3h4m-8 3 1 14h10l1-14M10 11v6m4-6v6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7V3l-4 4h4a8 8 0 1 0 1 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6 18 18M18 6 6 18"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.5 1.5m11.2 11.2 1.5 1.5m0-14.2-1.5 1.5M6.4 17.6l-1.5 1.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main sidebar">
+      <div class="brand"><div class="brand-mark"><img src="icons/icon-192.png" alt="" width="38" height="38"></div><div><div class="brand-name">Bakhaw<span>Scan</span></div><div class="brand-sub">MANGROVE MONITORING</div></div></div>
+      <div class="side-section-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-go="overview" aria-current="page"><svg><use href="#i-grid"/></svg><span>Overview</span></button>
+        <button class="nav-link" data-go="scanner"><svg><use href="#i-scan"/></svg><span>Leaf scanner</span></button>
+        <button class="nav-link" data-go="results"><svg><use href="#i-chart"/></svg><span>Scan results</span></button>
+        <button class="nav-link" data-go="history"><svg><use href="#i-clock"/></svg><span>Scan history</span></button>
+      </nav>
+      <div class="side-section-label second-label">EXPLORE</div>
+      <nav class="side-nav" aria-label="Explore">
+        <button class="nav-link" data-go="learn"><svg><use href="#i-book"/></svg><span>Learn &amp; explore</span></button>
+        <button class="nav-link" data-go="settings"><svg><use href="#i-settings"/></svg><span>Settings</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-tip"><span class="tip-icon"><svg><use href="#i-leaf"/></svg></span><strong>A closer look at mangroves.</strong><p>Document visible leaf symptoms, one scan at a time.</p></div>
+        <div class="side-foot">Research prototype · v2.1</div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-crumb"><span class="crumb-muted">Workspace</span><span class="crumb-slash">/</span><strong id="crumb">Overview</strong></div>
+        <div class="topbar-actions"><span id="connectivity" class="network-pill"><span class="network-dot"></span><span id="connectivityText">Online</span></span><button id="installBtn" class="top-install" type="button" hidden><svg><use href="#i-download"/></svg>Install app</button><span class="top-avatar" title="BakhawScan">BS</span></div>
+      </header>
+      <main id="main">
+        <!-- OVERVIEW -->
+        <section class="page active" id="page-overview" aria-labelledby="overview-title">
+          <div class="page-intro"><div><span class="eyebrow">FIELD MONITORING · BAKHAWSCAN</span><h1 id="overview-title">Good day, explorer <span class="wave">✳</span></h1><p>Observe, document, and understand visible symptoms on mangrove leaves.</p></div><span class="date-stamp" id="today"></span></div>
+          <div class="hero"><div class="hero-text"><span class="hero-tag"><svg><use href="#i-leaf"/></svg>AI-ASSISTED LEAF ANALYSIS</span><h2>Every leaf tells<br><em>a story.</em></h2><p>Capture a mangrove leaf and identify visible black, brown, or white spotting with a research model.</p><button type="button" class="btn btn-light hero-cta" data-go="scanner">Start a new scan <svg><use href="#i-arrow"/></svg></button></div><div class="hero-art" aria-hidden="true"><div class="art-ring ring-a"></div><div class="art-ring ring-b"></div><div class="leaf-branch"><span class="stem"></span><i class="blade b1"></i><i class="blade b2"></i><i class="blade b3"></i><i class="blade b4"></i><i class="blade b5"></i><i class="blade b6"></i></div><div class="hero-decoration">BAKHAW<br>SCAN / 26</div></div></div>
+          <div class="section-heading"><div><h2>Your monitoring snapshot</h2><p>Saved observations on this device</p></div></div>
+          <div class="metrics">
+            <article class="metric-card"><div class="metric-icon mint"><svg><use href="#i-image"/></svg></div><div class="metric-caption">Total saved scans</div><div class="metric-value" id="stat-scans">0</div><div class="metric-foot">Includes demo &amp; model scans</div></article>
+            <article class="metric-card"><div class="metric-icon blue"><svg><use href="#i-scan"/></svg></div><div class="metric-caption">Model-powered scans</div><div class="metric-value" id="stat-model">0</div><div class="metric-foot">Scans using your API</div></article>
+            <article class="metric-card"><div class="metric-icon orange"><svg><use href="#i-chart"/></svg></div><div class="metric-caption">Model detections logged</div><div class="metric-value" id="stat-spots">0</div><div class="metric-foot">Visible spot detections</div></article>
+          </div>
+          <div class="overview-lower"><article class="surface"><div class="card-top"><div><h3>Recent observations</h3><p>A quick look at your latest scans</p></div><button class="text-link" data-go="history">View all <svg><use href="#i-arrow"/></svg></button></div><div id="recentList" class="recent-list"></div></article><article class="surface guide-card"><div class="card-top"><div><h3>How BakhawScan works</h3><p>Three simple steps</p></div></div><div class="steps"><div class="step"><span>01</span><div><strong>Capture</strong><p>Take a clear photo of one mangrove leaf.</p></div></div><div class="step"><span>02</span><div><strong>Analyze</strong><p>Run the detector to locate visible spots.</p></div></div><div class="step"><span>03</span><div><strong>Review</strong><p>Explore the results and save your observation.</p></div></div></div><div class="guide-note"><svg><use href="#i-info"/></svg><span>Spot detection is not a confirmed disease diagnosis.</span></div></article></div>
+        </section>
+
+        <!-- SCANNER -->
+        <section class="page" id="page-scanner" aria-labelledby="scanner-title">
+          <div class="page-intro"><div><span class="eyebrow">LEAF ANALYSIS</span><h1 id="scanner-title">Leaf scanner</h1><p>Choose a saved image or scan live through your device camera.</p></div><span class="step-badge">STEP 01 / 02</span></div>
+          <div class="scan-method" role="group" aria-label="Choose scanner method">
+            <button type="button" id="uploadModeTab" class="scan-method-option active" aria-pressed="true"><svg><use href="#i-upload"/></svg><span><strong>Upload image</strong><small>Choose an existing photo</small></span></button>
+            <button type="button" id="liveModeTab" class="scan-method-option" aria-pressed="false"><svg><use href="#i-camera"/></svg><span><strong>Live camera scan</strong><small>Detect spots through your camera</small></span><span class="live-new">NEW</span></button>
+          </div>
+          <div id="uploadScanPanel"><div class="scanner-grid"><div class="scan-left"><article class="surface scan-surface"><div class="card-top"><div><h3>Leaf image</h3><p>Use a single, clear leaf photo</p></div><span id="imageState" class="soft-badge">No image</span></div><div class="image-stage" id="dropzone" tabindex="0" role="button" aria-label="Choose a leaf image or drop an image here"><div id="scanEmpty" class="drop-content"><div class="drop-icon"><svg><use href="#i-image"/></svg></div><h3>Drop your leaf photo here</h3><p>Drag &amp; drop a JPG, PNG, or WebP image<br>or choose one from your device.</p><span class="drop-hint">Maximum file size: 15 MB</span></div><canvas id="scanCanvas" role="img" aria-label="Selected leaf image preview" hidden></canvas></div><div class="image-actions"><button type="button" class="btn btn-outline" id="cameraBtn"><svg><use href="#i-camera"/></svg>Take photo</button><button type="button" class="btn btn-primary" id="chooseBtn"><svg><use href="#i-upload"/></svg>Choose image</button></div><input type="file" id="cameraInput" accept="image/*" capture="environment" hidden><input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/*" hidden></article><div class="inline-notice"><svg><use href="#i-shield"/></svg><span>Your photo is sent to the API only when you choose model detection. Demo mode runs locally.</span></div></div>
+          <div class="scan-right"><article class="surface settings-surface"><div class="card-top"><div><h3>Analysis settings</h3><p>Customize your scan</p></div><div class="scan-settings-icon"><svg><use href="#i-settings"/></svg></div></div><div id="sourceBanner" class="source-banner demo-source"><span class="source-icon"><svg><use href="#i-info"/></svg></span><div><strong id="sourceTitle">Demo mode is active</strong><p id="sourceMessage">Results are simulated and must not be treated as model predictions.</p></div></div><div class="field-block"><div class="field-title"><label for="confidence">Minimum confidence</label><output id="confidenceValue" for="confidence">40%</output></div><input id="confidence" type="range" min="10" max="95" step="5" value="40"><div class="range-ends"><span>More detections</span><span>Higher confidence</span></div></div><label class="toggle-row" for="showLabels"><span><strong>Show detection labels</strong><small>Display the class and confidence</small></span><input type="checkbox" id="showLabels" checked></label><div class="setting-divider"></div><div class="field-block"><label for="scanMode" class="input-label">Detection source</label><select id="scanMode"><option value="demo">Demo · simulated predictions</option><option value="api">Model · connect to API</option></select><button class="small-link" data-go="settings" type="button">Configure API connection <svg><use href="#i-arrow"/></svg></button></div><button type="button" id="analyzeBtn" class="btn btn-primary analyze-btn" disabled><svg><use href="#i-scan"/></svg><span>Analyze leaf</span><svg><use href="#i-arrow"/></svg></button><p id="scanStatus" class="scan-status" role="status" aria-live="polite">Choose a photo to get started.</p></article><article class="surface advice-surface"><div class="advice-title"><span class="advice-icon"><svg><use href="#i-sun"/></svg></span><h3>Tips for a better scan</h3></div><ul class="tip-list"><li>Photograph one leaf close up, in natural light.</li><li>Keep the leaf in focus and avoid strong shadows.</li><li>Make sure the affected areas are clearly visible.</li></ul></article></div></div></div>
+          <div id="liveScanPanel" hidden>
+            <div class="scanner-grid live-grid">
+              <div class="scan-left">
+                <article class="surface live-surface">
+                  <div class="card-top"><div><h3>Live camera view</h3><p>Position one mangrove leaf in the frame</p></div><span id="liveIndicator" class="live-indicator">CAMERA OFF</span></div>
+                  <div class="camera-stage" id="liveStage">
+                    <div id="cameraPlaceholder" class="camera-placeholder"><div class="camera-placeholder-icon"><svg><use href="#i-camera"/></svg></div><strong>Ready to open your camera</strong><span>Camera permission is needed to show a live preview.</span></div>
+                    <video id="liveVideo" autoplay playsinline muted aria-label="Live camera view" hidden></video>
+                    <canvas id="liveOverlay" aria-label="Detection boxes over camera view" hidden></canvas>
+                    <span id="liveOverlayTag" class="camera-overlay-tag" hidden>MODEL · PERIODIC SCAN</span>
+                    <span class="camera-guide guide-tl" aria-hidden="true"></span><span class="camera-guide guide-tr" aria-hidden="true"></span><span class="camera-guide guide-bl" aria-hidden="true"></span><span class="camera-guide guide-br" aria-hidden="true"></span>
+                  </div>
+                  <div class="live-status" role="status" aria-live="polite"><span class="live-pulse" id="livePulse"></span><span id="liveStatus">Camera is off. Select Start camera to begin.</span></div>
+                  <div class="live-counter" id="liveCounter" hidden><span id="liveSpotCount">0</span> visible spots above threshold <span class="live-updated" id="liveUpdated"></span></div>
+                  <div class="camera-actions">
+                    <button type="button" id="liveStartBtn" class="btn btn-primary"><svg><use href="#i-camera"/></svg><span>Start camera</span></button>
+                    <button type="button" id="livePauseBtn" class="btn btn-outline" disabled>Pause scanning</button>
+                    <button type="button" id="liveFlipBtn" class="btn btn-outline" disabled title="Switch between front and rear cameras">Flip camera</button>
+                    <button type="button" id="liveStopBtn" class="btn btn-outline" disabled>Stop camera</button>
+                  </div>
+                  <div class="camera-actions secondary-actions">
+                    <button type="button" id="liveCaptureBtn" class="btn btn-outline" disabled><svg><use href="#i-camera"/></svg>Use current frame</button>
+                    <button type="button" id="liveSaveBtn" class="btn btn-primary" disabled><svg><use href="#i-download"/></svg>Save latest analyzed frame</button>
+                  </div>
+                  <p class="live-footnote">Bounding boxes update when each frame finishes processing; they may lag behind a moving leaf. “Save latest analyzed frame” saves the exact image used for its detections.</p>
+                </article>
+                <div class="inline-notice"><svg><use href="#i-shield"/></svg><span>Camera access works on HTTPS or localhost. When model scanning is active, periodic camera frames are sent to your configured FastAPI server. Stop camera to end capture.</span></div>
+              </div>
+              <div class="scan-right">
+                <article class="surface settings-surface live-settings">
+                  <div class="card-top"><div><h3>Live detection settings</h3><p>Uses your existing YOLOv8s FastAPI model</p></div><div class="scan-settings-icon"><svg><use href="#i-settings"/></svg></div></div>
+                  <div class="source-banner model-source"><span class="source-icon"><svg><use href="#i-info"/></svg></span><div><strong id="liveSourceTitle">Model connection required</strong><p id="liveSourceMessage">Live boxes require a trained model with a working /predict endpoint. Demo mode shows camera preview without fake detections.</p></div></div>
+                  <div class="field-block"><div class="field-title"><label for="liveConfidence">Minimum confidence</label><output id="liveConfidenceValue" for="liveConfidence">40%</output></div><input id="liveConfidence" type="range" min="10" max="95" step="5" value="40"><div class="range-ends"><span>More detections</span><span>Higher confidence</span></div></div>
+                  <label class="toggle-row" for="liveLabels"><span><strong>Show detection labels</strong><small>Display the class and confidence</small></span><input type="checkbox" id="liveLabels" checked></label>
+                  <div class="setting-divider"></div><button class="small-link" data-go="settings" type="button">Configure model API <svg><use href="#i-arrow"/></svg></button>
+                  <div class="live-help"><strong>How live scanning works</strong><ol><li>Configure your API in Settings.</li><li>Start camera and allow access.</li><li>Hold the leaf steadily while bounding boxes refresh.</li><li>Save the latest analyzed frame to review full results.</li></ol></div>
+                  <p class="live-safety">Spot detection is for observation only. Live results do not confirm a specific mangrove disease.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESULTS -->
+        <section class="page" id="page-results" aria-labelledby="results-title"><div class="page-intro"><div><span class="eyebrow">LEAF ANALYSIS</span><h1 id="results-title">Scan results</h1><p>Review located symptoms, confidence scores, and observation notes.</p></div><button class="btn btn-outline compact-btn" data-go="scanner"><svg><use href="#i-refresh"/></svg>New scan</button></div>
+          <div id="resultsEmpty" class="surface empty-page"><div class="empty-page-icon"><svg><use href="#i-scan"/></svg></div><h2>No results to display yet</h2><p>Start by choosing a mangrove leaf photo and running an analysis.</p><button class="btn btn-primary" data-go="scanner">Go to leaf scanner <svg><use href="#i-arrow"/></svg></button></div>
+          <div id="resultsContent" hidden><div id="resultsDemoNotice" class="result-alert"><svg><use href="#i-info"/></svg><div><strong>Demonstration only</strong><p>These are randomized placeholder detections, not real AI results.</p></div></div><div class="result-heading"><div class="result-heading-main"><span id="resultSourceBadge" class="soft-badge">Demo</span><span id="resultTimestamp" class="meta-text"></span></div><div class="result-toolbar"><button id="downloadImageBtn" class="btn btn-outline compact-btn" type="button"><svg><use href="#i-download"/></svg>Annotated image</button><button id="downloadReportBtn" class="btn btn-outline compact-btn" type="button"><svg><use href="#i-download"/></svg>JSON report</button></div></div>
+            <div class="result-layout"><article class="surface result-image-card"><div class="card-top"><div><h3>Image analysis</h3><p id="resultImageCaption">Visible symptom markers</p></div><div class="view-toggle" role="group" aria-label="Image display mode"><button id="viewAnnotated" type="button" class="selected" aria-pressed="true">Detections</button><button id="viewOriginal" type="button" aria-pressed="false">Original</button></div></div><div class="result-photo-wrap"><canvas id="resultCanvas" role="img" aria-label="Leaf photo and detected spots"></canvas></div><div class="legend"><span><i class="color-dot black"></i>Black spots</span><span><i class="color-dot brown"></i>Brown spots</span><span><i class="color-dot white"></i>White spots</span></div></article><div class="result-side"><article class="surface result-summary"><h3>Detection summary</h3><div class="summary-total"><strong id="resultCount">0</strong><span>visible spot detections<br><small id="resultThreshold">At ≥ 40% confidence</small></span></div><div id="classBreakdown" class="breakdown"></div><p class="summary-foot">Confidence is a model score, not a probability that a disease is present.</p></article><article class="surface severity-card"><div class="severity-header"><span class="severity-symbol"><svg><use href="#i-leaf"/></svg></span><span>EXPERIMENTAL SPOTTING INDICATOR</span></div><h3 id="severityLabel">Not assessed</h3><div class="severity-track"><div id="severityFill"></div></div><p id="severityText" class="muted-text">Add a photo and analyze it to view a rough bounding-box coverage estimate.</p><p class="severity-warning">This compares detection-box area with photo area. It does not measure actual damaged leaf area or clinical severity.</p></article><article class="surface interpretation-card"><h3>Possible visual interpretation</h3><p id="possibleCondition" class="muted-text">Analyze a leaf to learn about visible patterns that may resemble leaf spotting or discoloration.</p><div class="interpretation-foot"><svg><use href="#i-info"/></svg><span>Educational context only — not a disease diagnosis.</span></div></article></div></div>
+            <article class="surface detection-detail"><div class="card-top"><div><h3>Individual detections</h3><p>Sorted by highest confidence</p></div><span id="detailCount" class="soft-badge">0 spots</span></div><div id="detectionList" class="detection-list"></div></article><div class="disclaimer"><svg><use href="#i-info"/></svg><p>BakhawScan detects visible spotting only. Different conditions can look similar in photos, and a qualified expert is needed to confirm a disease or its cause.</p></div></div>
+        </section>
+
+        <!-- HISTORY -->
+        <section class="page" id="page-history" aria-labelledby="history-title"><div class="page-intro"><div><span class="eyebrow">YOUR OBSERVATIONS</span><h1 id="history-title">Scan history</h1><p>Review your saved local observations and reopen past results.</p></div><button type="button" class="btn btn-outline compact-btn" id="clearHistoryBtn"><svg><use href="#i-trash"/></svg>Clear history</button></div><div class="history-summary"><span id="historyCount">0 saved scans</span><span>Stored on this device · Latest 12 scans</span></div><div class="history-grid" id="historyGrid"></div></section>
+
+        <!-- LEARN -->
+        <section class="page" id="page-learn" aria-labelledby="learn-title"><div class="page-intro"><div><span class="eyebrow">FIELD GUIDE</span><h1 id="learn-title">Learn &amp; explore</h1><p>Get familiar with the visual symptoms this project is designed to detect.</p></div></div><div class="learn-hero"><div class="learn-symbol"><svg><use href="#i-leaf"/></svg></div><div><span class="eyebrow">ABOUT THE PROJECT</span><h2>Protecting mangroves starts with observation.</h2><p>BakhawScan is a student research prototype designed to support documentation of visible leaf symptoms in mangrove monitoring. It does not identify exact diseases or classify mangrove species.</p></div></div><div class="section-heading"><div><h2>Three symptom classes</h2><p>Visible patterns the model is intended to locate</p></div></div><div class="learn-cards"><article class="surface symptom-card"><div class="symptom-illustration black-spots-art"><span></span><span></span><span></span></div><h3>Black spots</h3><p>Dark or black marks appearing on the leaf surface.</p><span class="symptom-label"><i class="color-dot black"></i>BLACK SPOTS</span></article><article class="surface symptom-card"><div class="symptom-illustration brown-spots-art"><span></span><span></span><span></span></div><h3>Brown spots</h3><p>Brown discoloration or visible brown patches on leaf tissue.</p><span class="symptom-label"><i class="color-dot brown"></i>BROWN SPOTS</span></article><article class="surface symptom-card"><div class="symptom-illustration white-spots-art"><span></span><span></span><span></span></div><h3>White spots</h3><p>Pale or white marks that can be seen in the leaf image.</p><span class="symptom-label"><i class="color-dot white"></i>WHITE SPOTS</span></article></div><div class="learn-bottom"><article class="surface"><h3>Four mangrove species included in the proposal</h3><p class="muted-text">The proposed dataset includes these species, but the app does not automatically identify which species is pictured.</p><div class="species-list"><span><svg><use href="#i-leaf"/></svg><em>Lumnitzera littorea</em></span><span><svg><use href="#i-leaf"/></svg><em>Rhizophora apiculata</em></span><span><svg><use href="#i-leaf"/></svg><em>Scyphiphora hydrophyllacea</em></span><span><svg><use href="#i-leaf"/></svg><em>Sonneratia alba</em></span></div></article><article class="surface"><h3>What the findings mean</h3><p class="muted-text">Spotting can have multiple causes. A single leaf photo may not reveal whether a mark is linked to disease, stress, physical damage, or another factor. Use detections to guide documentation, not to claim a confirmed diagnosis.</p><div class="guide-note"><svg><use href="#i-shield"/></svg><span>Research and learning support — not a replacement for expert assessment.</span></div></article></div></section>
+
+        <!-- SETTINGS -->
+        <section class="page" id="page-settings" aria-labelledby="settings-title"><div class="page-intro"><div><span class="eyebrow">PREFERENCES</span><h1 id="settings-title">Settings</h1><p>Configure the detection source and manage local app data.</p></div></div><div class="settings-stack"><article class="surface settings-card"><div class="card-top"><div><h3>Detection connection</h3><p>Choose between simulated results and your trained model</p></div><span class="metric-icon mint"><svg><use href="#i-settings"/></svg></span></div><div class="form-field"><label for="modeSelect">Detection source</label><select id="modeSelect"><option value="demo">Demo mode (simulated detections)</option><option value="api">My FastAPI model</option></select></div><div class="form-field"><label for="apiUrl">FastAPI server address</label><input id="apiUrl" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://your-api.example.com"><p class="field-help">Images are sent as the <code>file</code> field to <code>/predict</code>. Use a reachable HTTPS URL for a deployed PWA.</p></div><div class="setting-info"><svg><use href="#i-info"/></svg><p>Demo mode draws random boxes for interface testing. It does not run YOLOv8s. The API option requires a separately running server with a trained model.</p></div><div class="settings-actions"><span id="settingsSaved" role="status" aria-live="polite">Settings save automatically.</span></div></article><article class="surface settings-card"><div class="card-top"><div><h3>Your local data</h3><p>Understand what is stored on this device</p></div><span class="metric-icon blue"><svg><use href="#i-shield"/></svg></span></div><p class="muted-text">The app can save up to 12 recent scan previews, detection coordinates, and timestamps in this browser's local storage. This history isn't shared between devices. Clearing browser data can delete it.</p><button id="settingsClearBtn" type="button" class="btn btn-danger-outline"><svg><use href="#i-trash"/></svg>Delete all saved scans</button></article><article class="surface settings-card"><h3>API response format</h3><p class="muted-text">The frontend keeps the original API contract and expects pixel coordinates relative to the uploaded image:</p><pre class="code-sample"><code>{
+  "image_width": 1280,
+  "image_height": 960,
+  "detections": [
+    {"class_name": "Brown_spot", "confidence": 0.92,
+     "box": [120, 85, 180, 145]}
+  ]
+}</code></pre><p class="field-help">Expected labels: black, brown, and white spots. The frontend also accepts plural/underscore variations.</p></article></div></section>
+      </main>
+      <footer class="app-footer"><span>© BakhawScan · Mangrove leaf symptom detection</span><span>Educational research prototype · Not a diagnosis</span></footer>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><button class="active" data-go="overview" aria-current="page"><svg><use href="#i-grid"/></svg><span>Home</span></button><button data-go="scanner"><svg><use href="#i-scan"/></svg><span>Scan</span></button><button data-go="results"><svg><use href="#i-chart"/></svg><span>Results</span></button><button data-go="history"><svg><use href="#i-clock"/></svg><span>History</span></button><button data-go="learn"><svg><use href="#i-book"/></svg><span>Learn</span></button><button data-go="settings"><svg><use href="#i-settings"/></svg><span>More</span></button></nav>
+  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>

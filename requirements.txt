@@ -1,0 +1,5 @@
+# Your bakhaw-env already has torch and ultralytics. This adds the web server parts.
+fastapi
+uvicorn[standard]
+python-multipart
+pillow
