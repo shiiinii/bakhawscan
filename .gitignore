@@ -1,0 +1,17 @@
+# Environments and caches
+bakhaw-env/
+__pycache__/
+*.pyc
+.env
+
+# Large or local-only training files
+dataset/
+run1/
+runs/
+runs_local/
+weights/last.pt
+last.pt
+*.zip
+
+# Secrets: never commit API keys
+*.key
